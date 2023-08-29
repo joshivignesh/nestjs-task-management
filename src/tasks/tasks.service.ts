@@ -8,13 +8,12 @@ import { TaskEntity } from './dto/task.entity';
 import { EntityManager } from 'typeorm';
 import { TaskRepository } from './dto/task.repository';
 
-
 @Injectable()
 export class TasksService {
   constructor(
     @InjectEntityManager()
     private taskManager: EntityManager,
-    // @InjectRepository(TaskEntity) // 
+    // @InjectRepository(TaskEntity) //
     // private taskRepository: Repository<TaskEntity>,
     private readonly taskRepository: TaskRepository,
   ) {}
@@ -23,9 +22,13 @@ export class TasksService {
 
   // private tasks: TaskEntity[] = [];
 
-  // // // getAllTasks(): Task[] {
-  // // //   return this.tasks;
-  // // // }
+  async getAllTasks(): Promise<TaskEntity[]> {
+    const record = this.taskRepository.find();
+    if (!record) {
+      throw new NotFoundException();
+    }
+    return record;
+  }
 
   async getTaskById(id: string): Promise<TaskEntity> {
     const record = await this.taskRepository.findOneBy({ id });
@@ -74,20 +77,20 @@ export class TasksService {
 
   // async createTasks(createTaskDto): Promise<TaskEntity> {
   //   const { title, description } = createTaskDto;
-    // const task: TaskEntity = {
-    //   id,
-    //   title,
-    //   description
-    // };
+  // const task: TaskEntity = {
+  //   id,
+  //   title,
+  //   description
+  // };
 
-    // const task = TaskEntity.create({
-    //   title: title,
-    //   description: description,
-    //   taskStatus: 'OPEN',
-    // });
+  // const task = TaskEntity.create({
+  //   title: title,
+  //   description: description,
+  //   taskStatus: 'OPEN',
+  // });
 
-    // return await task.save();
-    // this.taskRepository.update().update(createTaskDto);
+  // return await task.save();
+  // this.taskRepository.update().update(createTaskDto);
   // }
 
   // // // createTasks(createTaskDto: CreateTaskDto): Task {
