@@ -106,11 +106,11 @@ export class TasksService {
   // // //   return task;
   // // // }
 
-  // // // updateTaskStatus(id: string, status: TaskStatus) {
-  // // //   const task = this.getTaskById(id);
-  // // //   task.status = status;
-  // // //   return task;
-  // // // }
+  updateTaskStatus(id: string, status: TaskStatus) {
+    const task = this.getTaskById(id);
+    task.status = status;
+    return task;
+  }
 
   // // // deleteTask(id: string): void {
   // // //   const found = this.getTaskById(id);
