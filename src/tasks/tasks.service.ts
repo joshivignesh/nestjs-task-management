@@ -106,10 +106,13 @@ export class TasksService {
   // // //   return task;
   // // // }
 
-  updateTaskStatus(id: string, status: TaskStatus) {
+  async updateTaskStatus(id: string, status: TaskStatus) {
     const task = this.getTaskById(id);
-    task.status = status;
-    return task;
+    if (task) {
+      (await task).taskstatus = status;
+      const taskrep = this.taskRepository.save(await task);
+      return taskrep;
+    }
   }
 
   // // // deleteTask(id: string): void {
