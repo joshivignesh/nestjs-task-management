@@ -20,7 +20,7 @@ export class TasksService {
 
   //private tasks: Task[] = [];
 
-  // private tasks: TaskEntity[] = [];
+  private tasks: TaskEntity[] = [];
 
   async getAllTasks(): Promise<TaskEntity[]> {
     const record = this.taskRepository.find();
@@ -113,6 +113,13 @@ export class TasksService {
       const taskrep = this.taskRepository.save(await task);
       return taskrep;
     }
+  }
+
+  async deleteTask(id: string): Promise<void> {
+    const found = this.getTaskById(id);
+    this.tasks = this.tasks.filter(
+      async (task) => task.id !== (await found).id,
+    );
   }
 
   // // // deleteTask(id: string): void {
