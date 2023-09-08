@@ -16,8 +16,6 @@ export class TasksService {
     private readonly taskRepository: TaskRepository,
   ) {}
 
-  //private tasks: Task[] = [];
-
   private tasks: TaskEntity[] = [];
 
   async getAllTasks(): Promise<TaskEntity[]> {
@@ -73,37 +71,6 @@ export class TasksService {
     return this.taskRepository.createTask(createTaskDto);
   }
 
-  // async createTasks(createTaskDto): Promise<TaskEntity> {
-  //   const { title, description } = createTaskDto;
-  // const task: TaskEntity = {
-  //   id,
-  //   title,
-  //   description
-  // };
-
-  // const task = TaskEntity.create({
-  //   title: title,
-  //   description: description,
-  //   taskStatus: 'OPEN',
-  // });
-
-  // return await task.save();
-  // this.taskRepository.update().update(createTaskDto);
-  // }
-
-  // // // createTasks(createTaskDto: CreateTaskDto): Task {
-  // // //   const { title, description } = createTaskDto;
-
-  // // //   const task: Task = {
-  // // //     id: uuid(),
-  // // //     title,
-  // // //     description,
-  // // //     status: TaskStatus.OPEN,
-  // // //   };
-  // // //   this.tasks.push(task);
-  // // //   return task;
-  // // // }
-
   async updateTaskStatus(id: string, status: TaskStatus) {
     const task = this.getTaskById(id);
     if (task) {
@@ -119,5 +86,4 @@ export class TasksService {
       async (task) => task.id !== (await found).id,
     );
   }
-
 }
