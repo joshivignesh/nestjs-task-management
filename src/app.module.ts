@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TasksModule } from './tasks/tasks.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TaskdataService } from './taskdata/taskdata.service';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -16,7 +16,8 @@ import { TaskdataService } from './taskdata/taskdata.service';
       autoLoadEntities: true,
       synchronize: true,
     }),
+    AuthModule,
   ],
-  providers: [TaskdataService],
+  providers: [],
 })
 export class AppModule {}
