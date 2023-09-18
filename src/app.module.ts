@@ -3,6 +3,7 @@ import { TasksModule } from './tasks/tasks.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { AuthtestController } from './authtest/authtest.controller';
+import { AuthtestController } from './authtest/authtest.controller';
 
 @Module({
   imports: [
