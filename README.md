@@ -1,73 +1,158 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# 📋 NestJS Task Management API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+[![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=flat-square&logo=nestjs&logoColor=white)](https://nestjs.com)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://typescriptlang.org)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)](https://postgresql.org)
+[![JWT](https://img.shields.io/badge/JWT-000000?style=flat-square&logo=jsonwebtokens&logoColor=white)](https://jwt.io)
+[![Jest](https://img.shields.io/badge/Jest-C21325?style=flat-square&logo=jest&logoColor=white)](https://jestjs.io)
+[![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=flat-square&logo=swagger&logoColor=black)](https://swagger.io)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+A production-ready **Task Management REST API** built with **NestJS** and **TypeScript**, demonstrating clean backend architecture with authentication, authorization, data persistence, and comprehensive Swagger documentation.
 
-## Description
+## ✨ Features
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- 🔐 **JWT Authentication** — register, login, secure token-based auth
+- 👤 **User-scoped data** — users only see and manage their own tasks
+- 📋 **Full CRUD** — create, read, update, delete tasks with validation
+- 🔍 **Search & filter** — filter tasks by status and search by title/description
+- 📝 **Swagger UI** — fully documented API at `/api`
+- ✅ **Input validation** — `class-validator` DTOs with descriptive error messages
+- 🧪 **Unit tested** — Jest tests for services and controllers
+- 🏗️ **Modular architecture** — NestJS modules, dependency injection, decorators
 
-## Installation
+## 🛠️ Tech Stack
 
-```bash
-$ npm install
+| Layer | Technology |
+|-------|-----------|
+| Framework | NestJS (Node.js) |
+| Language | TypeScript |
+| Database | PostgreSQL |
+| ORM | TypeORM |
+| Auth | JWT (Passport.js strategy) |
+| Validation | class-validator · class-transformer |
+| Docs | Swagger / OpenAPI 3.0 |
+| Testing | Jest · Supertest |
+| Config | `@nestjs/config` with `.env` |
+
+## 🏗️ Architecture
+
+```
+nestjs-task-management/
+├── src/
+│   ├── auth/                  # Authentication module
+│   │   ├── auth.controller.ts # POST /auth/signup, POST /auth/signin
+│   │   ├── auth.service.ts    # Password hashing, JWT generation
+│   │   ├── auth.module.ts
+│   │   ├── jwt.strategy.ts    # Passport JWT strategy
+│   │   ├── get-user.decorator.ts
+│   │   └── dto/
+│   │       ├── auth-credentials.dto.ts
+│   ├── tasks/                 # Tasks module (main domain)
+│   │   ├── tasks.controller.ts
+│   │   ├── tasks.service.ts
+│   │   ├── tasks.module.ts
+│   │   ├── task.entity.ts     # TypeORM entity with User relation
+│   │   ├── task-status.enum.ts
+│   │   ├── tasks.repository.ts
+│   │   └── dto/
+│   │       ├── create-task.dto.ts
+│   │       ├── update-task-status.dto.ts
+│   │       └── get-tasks-filter.dto.ts
+│   └── main.ts                # Bootstrap + Swagger setup
+├── test/
+│   ├── tasks.service.spec.ts
+│   └── auth.service.spec.ts
+├── .env.example
+└── package.json
 ```
 
-## Running the app
+## 🔌 API Endpoints
 
-```bash
-# development
-$ npm run start
+### Auth
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/auth/signup` | Register a new user |
+| `POST` | `/auth/signin` | Login and receive JWT |
 
-# watch mode
-$ npm run start:dev
+### Tasks (all require `Authorization: Bearer <token>`)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/tasks` | Get all tasks (with optional filters) |
+| `POST` | `/tasks` | Create a new task |
+| `GET` | `/tasks/:id` | Get a task by ID |
+| `PATCH` | `/tasks/:id/status` | Update task status |
+| `DELETE` | `/tasks/:id` | Delete a task |
 
-# production mode
-$ npm run start:prod
+### Task Status values
+`OPEN` → `IN_PROGRESS` → `DONE`
+
+### Filter query params
+```
+GET /tasks?status=OPEN&search=shopping
 ```
 
-## Test
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+
+- PostgreSQL running locally (or Docker)
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+git clone https://github.com/joshivignesh/nestjs-task-management.git
+cd nestjs-task-management
+npm install
 ```
 
-## Support
+### Environment setup
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+cp .env.example .env
+```
 
-## Stay in touch
+```env
+DB_HOST=localhost
+DB_PORT=5432
+DB_USERNAME=postgres
+DB_PASSWORD=yourpassword
+DB_DATABASE=task-management
+JWT_SECRET=yourjwtsecret
+```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Run
 
-## License
+```bash
+# Development (hot reload)
+npm run start:dev
 
-Nest is [MIT licensed](LICENSE).
+# Production
+npm run build && npm run start:prod
+```
+
+API available at `http://localhost:3000`  
+Swagger docs at `http://localhost:3000/api`
+
+### Test
+
+```bash
+npm run test          # Unit tests
+npm run test:watch    # Watch mode
+npm run test:cov      # Coverage report
+```
+
+## 🔒 Auth Flow
+
+```
+POST /auth/signup  →  hashed password stored  →  201 Created
+POST /auth/signin  →  validate credentials    →  { accessToken: "eyJ..." }
+
+All task routes:
+  Request headers: { Authorization: "Bearer eyJ..." }
+  JWT Strategy extracts user → Guards protect routes
+  Tasks filtered to authenticated user only
+```
+
+## 👤 Author
+
+**Vignesh Joshi** — Senior Full Stack Engineer  
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-joshivignesh-0077B5?style=flat-square&logo=linkedin)](https://linkedin.com/in/joshivignesh)
+[![GitHub](https://img.shields.io/badge/GitHub-joshivignesh-181717?style=flat-square&logo=github)](https://github.com/joshivignesh)
